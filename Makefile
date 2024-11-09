@@ -45,8 +45,8 @@ clean:
 	rm -rf $(OBJSDIR)
 
 fclean: clean
-	rm -f $(NAME) $(TESTERNAME)
+	rm -f $(NAME)
 
-re: fclean all test
+re: fclean all
 
-re_bonus: fclean all bonus tester
+re_bonus: fclean all bonus

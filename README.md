@@ -36,9 +36,11 @@ After compilation, the library can be linked to other projects. Here’s an exam
 gcc -o test_program test.c -L. -lasm
 ./test_program
 
-This repo already has a test as a submodule from:
+### This repo already has a test as a submodule from:
 [Try my test](https://github.com/HeitorMP/42-libasm-tester)
 
+
+### !First compile the main project!
 
 ### Edit the tests.h File
 
