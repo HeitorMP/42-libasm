@@ -7,12 +7,17 @@ section .text
     ;rsi = cmp function
 
 ft_list_sort:
+    
+    mov rax, [rdi]
+    test rax, rax
+    jz .return_from_null
+    test rsi, rsi
+    jz .return_from_null
+
     push rbp
     mov rbp, rsp
     mov r15, rsi ; r15 = cmp function
 
-    test rdi, rdi
-    jz .return
 
     push rdi
     mov r9, rdi 
@@ -61,4 +66,7 @@ ft_list_sort:
 .return:
     pop rdi                 ; Restaura rdi
     leave
+    ret
+
+.return_from_null:
     ret
