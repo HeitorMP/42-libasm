@@ -22,13 +22,9 @@ To compile and test the library, ensure you have `nasm` (Netwide Assembler) inst
 git clone https://github.com/yourusername/42-libasm.git
 cd 42-libasm
 
-#update the submodules
-git submodule update --init --recursive
-
 # Compile the library
 make
 ```
-
 ## Usage
 
 After compilation, the library can be linked to other projects. Here’s an example of compiling a test file with libasm.a:
@@ -36,42 +32,8 @@ After compilation, the library can be linked to other projects. Here’s an exam
 gcc -o test_program test.c -L. -lasm
 ./test_program
 
-### This repo already has a test as a submodule from:
+### : I wrote a test for this project and you can check it here.
 [Try my test](https://github.com/HeitorMP/42-libasm-tester)
-
-
-### !First compile the main project!
-
-### Edit the tests.h File
-
-Open the tests.h file inside the tester folder and update the path to the libasm.h header file to point to its correct location in your environment.
-
-```
-// path to your libasm.h
-# include "../headers/libasm.h" <- change thie if needed
-```
-
-### Edit the Makefile
-
-Open the Makefile inside the tester folder and update the path to the libasm.a library file so it points to the correct location.
-
-```
-PATH_TO_LIBASM_A  = ../libasm.a <- change thie if needed
-```
-
-Compile and Run the Tester
-    Compile
-    After configuring the files, compile the tester by running:
-```
-make
-```
-
-Run the Tester
-Once compiled, run the tester with:
-
-```
-./libasm-tester
-```
 
 ## Functions
 
