@@ -20,8 +20,7 @@ ft_write:
     neg rax
     mov rdi, rax                        ; rdi = rax(erro code)
     call __errno_location WRT ..plt     ; call errno_location external function, errno now is set but rax is changed to
-    mov [rax], rdi                      ; move the value in rdi to rax now rax has the original return
-    mov rax, -1                          
+    mov rax, -1
 
 .return:
     ret
