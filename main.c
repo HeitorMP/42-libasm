@@ -8,15 +8,33 @@ void print_errno_comparison(const char *func_name) {
     printf("Errno from %s: %d\n", func_name, errno);
 }
 
+void free_list(t_list *list) {
+    t_list *tmp;
+
+    while (list) {
+        tmp = list;
+        list = list->next;
+        free(tmp);
+    }
+}
+
+void print_list(t_list *list) {
+    t_list *tmp = list;
+    while (tmp) {
+        printf("%s\n", (char *)tmp->data);
+        tmp = tmp->next;
+    }
+}
+
 int main()
 {
-     // Teste 1: ft_strlen vs strlen
+     // Test 1: ft_strlen vs strlen
     const char *str = "Hello, World!";
     printf("Testing ft_strlen vs strlen:\n");
     printf("ft_strlen: %zu\n", ft_strlen(str));
     printf("strlen: %zu\n\n", strlen(str));
 
-    // Teste 2: ft_strcpy vs strcpy
+    // Test 2: ft_strcpy vs strcpy
     char dest1[50], dest2[50];
     ft_strcpy(dest1, str);
     strcpy(dest2, str);
@@ -24,7 +42,7 @@ int main()
     printf("ft_strcpy: %s\n", dest1);
     printf("strcpy: %s\n\n", dest2);
 
-    // Teste 3: ft_strcmp vs strcmp
+    // Test 3: ft_strcmp vs strcmp
     const char *str1 = "Hello";
     const char *str2 = "Hello";
     const char *str3 = "World";
@@ -34,26 +52,26 @@ int main()
     printf("ft_strcmp (str1 vs str3): %d\n", ft_strcmp(str1, str3));
     printf("strcmp (str1 vs str3): %d\n\n", strcmp(str1, str3));
 
-    // Teste 4: ft_write vs write
+    // Test 4: ft_write vs write
     const char *message = "Hello, write test!\n";
     printf("Testing ft_write vs write:\n");
     
-    // Teste ft_write
+    // Test ft_write
     if (ft_write(STDOUT_FILENO, message, strlen(message)) == -1) {
         print_errno_comparison("ft_write");
     }
 
-    // Teste write
+    // Test write
     if (write(STDOUT_FILENO, message, strlen(message)) == -1) {
         print_errno_comparison("write");
     }
     printf("\n");
 
-    // Teste 5: ft_read vs read
+    // Test 5: ft_read vs read
     char buffer[100];
     printf("Testing ft_read vs read:\n");
 
-    // Teste ft_read
+    // Test ft_read
     printf("Enter some text: ");
     ft_read(STDIN_FILENO, buffer, sizeof(buffer));
     print_errno_comparison("ft_read");
@@ -68,7 +86,7 @@ int main()
     print_errno_comparison("write");
     printf("\n");
 
-    // Teste 6: ft_strdup vs strdup
+    // Test 6: ft_strdup vs strdup
     const char *str_to_duplicate = "Duplicate me!";
     char *dup1 = ft_strdup(str_to_duplicate);
     char *dup2 = strdup(str_to_duplicate);
@@ -76,27 +94,50 @@ int main()
     printf("ft_strdup: %s\n", dup1);
     printf("strdup: %s\n", dup2);
 
-    // Liberar a memória alocada por ft_strdup e strdup
     free(dup1);
     free(dup2);
 
     //Atoi Base
     printf("Atoi base: %d\n", ft_atoi_base("", "01"));
 
-    //
+    // push front
     t_list *list = NULL;
-    char* data = NULL;
-
-    // Test 1: null list
     ft_list_push_front(&list, "first");
-    printf("Element 1: %s\n", (char*)list->data);
+    print_list(list);
 
     ft_list_push_front(&list, "second");
-    printf("Element 1: %s\n", (char*)list->data);
-    printf("Element 2: %s\n", (char*)list->next->data);
+    print_list(list);
 
-    
+    free_list(list);
 
+    // remove if e list size
+    list = NULL;
+    printf("List before remove: \n");
+    ft_list_push_front(&list, "World");
+    ft_list_push_front(&list, "Hello");
+    ft_list_push_front(&list, "World");
+    ft_list_push_front(&list, "Hello");
+    print_list(list);
+    printf("\nList size: %d\n", ft_list_size(list));
+    printf("\nList after remove: \n");
+    ft_list_remove_if(&list, "World", strcmp, free);
+    print_list(list);
+    printf("\nList size: %d\n", ft_list_size(list));
+    free_list(list);
 
+    // sort list
+    list = NULL;
+    printf("List before sorting: \n");
+    ft_list_push_front(&list, "1");
+    ft_list_push_front(&list, "2");
+    ft_list_push_front(&list, "3");
+    ft_list_push_front(&list, "4");
+    print_list(list);
+
+    printf("List after sorting: \n");
+    ft_list_sort(&list, &ft_strcmp);
+    print_list(list);
+
+    free(list);
     return 0;
 }
