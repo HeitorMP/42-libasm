@@ -18,7 +18,7 @@ ft_list_remove_if:
 
 .loop_list:
     test r14, r14                   ; Check if r14 is NULL (end of the list)
-    jz .return                       ; If NULL, return (end of list)
+    jz .return                      ; If NULL, return (end of list)
 
     ; prepare the stack for the call to the cmp function
     push r14

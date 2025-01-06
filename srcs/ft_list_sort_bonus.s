@@ -23,8 +23,8 @@ ft_list_sort:
     mov r9, rdi 
 
 .sort_start:
-    mov r14, 0             	; Reseta a flag de troca para a nova passagem
-	pop rdi					; Restaura rdi
+    mov r14, 0             	; reset flag
+	pop rdi					; Reset rdi
     mov r10, [rdi]         	; r10 = begin_list node
 	push rdi
 
@@ -54,17 +54,17 @@ ft_list_sort:
     mov [r10], r13      	; r10.data = r11.data
     mov [r11], r12      	; r11.data = r10.data
 
-    mov r14, 1             	; Marca que houve uma troca
+    mov r14, 1             	; change gflag
 
-    ; Avança para o próximo par de nós
+    ; next node
     mov r10, [r10 + 8]      ; r10 = r10.next
 
 .check_if_sorted:
     cmp r14, 1
-    je .sort_start          ; Se houve troca, reinicia a partir do início
+    je .sort_start          ; if flag change on , reset list
 
 .return:
-    pop rdi                 ; Restaura rdi
+    pop rdi                 ; reset rdi
     leave
     ret
 
